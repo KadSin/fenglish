@@ -4,7 +4,8 @@
   "description": "Fenglish tools",
   "main": "index.js",
   "scripts": {
-    "test": "test"
+    "test": "jest",
+    "test-watch": "jest --watch"
   },
   "repository": {
     "type": "git",
@@ -32,6 +33,7 @@
   "devDependencies": {
     "eslint": "^8.21.0",
     "eslint-config-prettier": "^8.5.0",
-    "eslint-plugin-import": "^2.26.0"
+    "eslint-plugin-import": "^2.26.0",
+    "jest": "^28.1.3"
   }
 }
