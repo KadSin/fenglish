@@ -1,0 +1,32 @@
+{
+  "name": "fenglish",
+  "version": "0.0.1",
+  "description": "Fenglish tools",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KadSin/fenglish.git"
+  },
+  "keywords": [
+    "Fenglish",
+    "Pinglish",
+    "Pingilish",
+    "Finglish",
+    "Fingilish",
+    "Phinglish",
+    "Phingilish",
+    "Farsi",
+    "Persian",
+    "English",
+    "Language Tools"
+  ],
+  "author": "Sina Kadkhodaei",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/KadSin/fenglish/issues"
+  },
+  "homepage": "https://github.com/KadSin/fenglish#readme"
+}
