@@ -1,0 +1,1 @@
+All tips to check in algorithm
