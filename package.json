@@ -2,6 +2,7 @@
   "name": "fenglish",
   "version": "0.0.1",
   "description": "Fenglish tools",
+  "type": "module",
   "main": "index.js",
   "scripts": {
     "test": "jest",
