@@ -5,12 +5,12 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
-    "test-watch": "jest --watch"
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
+    "test-watch": "node --experimental-vm-modules node_modules/jest/bin/jest.js --watch"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/KadSin/fenglish.git"
+    "url": "https://github.com/KadSin/fenglish.git"
   },
   "keywords": [
     "Fenglish",
@@ -25,7 +25,7 @@
     "English",
     "Language Tools"
   ],
-  "author": "Sina Kadkhodaei",
+  "author": "Sina Kadkhodaei <kadkhodaeisina@gmail.com>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/KadSin/fenglish/issues"
