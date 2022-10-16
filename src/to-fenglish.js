@@ -1,39 +1,48 @@
 import lettersMap from './letters-map'
-import { A_BA_KOLAH, ALEF, VOWELS } from './constants'
 
 export function toFenglish(text) {
-	let fenglish = ''
+	const words = text.split(' ')
+	let fenglishWords = []
 
-	for(let i = 0;i < text.length;i++) {
-		const before = text[i - 1]
-		let current = text[i]
-		const next = text[i + 1]
+	for(let word of words) {
+		let fenglish = ''
 
-		if(VOWELS.includes(next)) {
-			if(current == ALEF) {
-				current = next
-				i++
+		for(let position = 1; position <= word.length; position++) {
+			const previous = word[position - 2]
+			let current = word[position - 1]
+			const next = word[position]
+
+			if(isVowel(next)) {
+				if(isAlef(current)) {
+					current = next
+					position++
+				}
+			} else {
+				if(position == 2) {
+					if(isAlef(current) && word.length == 3) {
+						fenglish = fenglish + 'a'
+					}
+
+					if(isAlef(previous) && isAlef(next) && word.length == 4) {
+						fenglish = 'a' + fenglishLetter(current) + 'a'
+						continue
+					}
+				}
 			}
 
-			if(before == A_BA_KOLAH) {
-				fenglish = fenglish.slice(0, -1)
-			}
-		}else{
-			if(current == ALEF && text.length == 3) {
-				fenglish = fenglish + 'a'
-			}
-
-			if(i == 1 && before == A_BA_KOLAH && next == ALEF) {
-				fenglish = 'a' + fenglishLetter(current) + 'a'
-				continue
-			}
+			fenglish = fenglish + fenglishLetter(current)
 		}
 
-		fenglish = fenglish + fenglishLetter(current)
+		fenglishWords.push(fenglish)
 	}
 
-	return fenglish
+	return fenglishWords.join(' ')
 }
+
+/** @summary is one of `an`, `en`, `on`, `a`, `e`, `o` */
+const isVowel = (char) => ['ً', 'ٍ', 'ٌ', 'َ', 'ِ', 'ُ'].includes(char)
+
+const isAlef = (char) => ['آ', 'ا'].includes(char)
 
 function fenglishLetter(letter) {
 	return lettersMap[letter] || letter
