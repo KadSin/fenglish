@@ -64,6 +64,6 @@ describe('toFenglish for ALEF', () => {
 
 function expectPersianIsFenglish(persian, fenglish) {
 	persian.forEach(
-		(word, i) => expect(toFenglish(word)).toEqual(fenglish[i]),
+		(value, i) => expect(toFenglish(value)).toEqual(fenglish[i]),
 	)
 }
