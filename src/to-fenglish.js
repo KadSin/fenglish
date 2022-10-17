@@ -1,53 +1,86 @@
 import lettersMap from './letters-map'
 
-export function toFenglish(text) {
-	const words = text.split(' ')
-	let fenglishWords = []
+export class ToFenglish {
+	#text
+	#fenglish
+	#position
+	#previous
+	#current
+	#next
+	#word
 
-	for(let word of words) {
-		fenglishWords.push(byWord(word))
+	constructor(text) {
+		this.#text = text
 	}
 
-	return fenglishWords.join(' ')
-}
+	convert() {
+		const words = this.#text.split(' ')
+		let fenglishWords = []
 
-function byWord(word) {
-	let fenglish = ''
+		for(let word of words) {
+			this.#word = word
+			this.#byWord()
 
-	for(let position = 1; position <= word.length; position++) {
-		const previous = word[position - 2]
-		let current = word[position - 1]
-		const next = word[position]
+			fenglishWords.push(this.#fenglish)
+		}
 
-		if(isVowel(next)) {
-			if(isAlef(current)) {
-				current = next
-				position++
+		return fenglishWords.join(' ')
+	}
+
+	#byWord() {
+		this.#fenglish = ''
+
+		for(this.#position = 1; this.#position <= this.#word.length; this.#position++) {
+			this.#previous = this.#word[this.#position - 2]
+			this.#current = this.#word[this.#position - 1]
+			this.#next = this.#word[this.#position]
+
+			if(this.#isVowel(this.#next)) {
+				this.#onNextLetterIsVowel()
+			} else {
+				this.#onNextLetterIsNotVowel()
 			}
-		} else {
-			if(position == 2) {
-				if(isAlef(current) && word.length == 3) {
-					fenglish = fenglish + 'a'
-				}
+		}
+	}
 
-				if(isAlef(previous) && isAlef(next) && word.length == 4) {
-					fenglish = 'a' + fenglishLetter(current) + 'a'
-					continue
-				}
+	/** @summary is it one of `an`, `en`, `on`, `a`, `e`, `o`? */
+	#isVowel(char) {
+		return ['ً', 'ٍ', 'ٌ', 'َ', 'ِ', 'ُ'].includes(char)
+	}
+
+	#onNextLetterIsVowel() {
+		if(this.#isAlef(this.#current)) {
+			this.#current = this.#next
+			this.#position++
+		}
+
+		this.#translateCurrentLetter()
+	}
+
+	#onNextLetterIsNotVowel() {
+		if(this.#position == 2) {
+			if(this.#isAlef(this.#current) && this.#word.length == 3) {
+				this.#fenglish = this.#fenglish + 'a'
+			}
+
+			if(this.#isAlef(this.#previous) && this.#isAlef(this.#next) && this.#word.length == 4) {
+				this.#fenglish = 'a' + this.#fenglishLetter(this.#current) + 'a'
+				return
 			}
 		}
 
-		fenglish = fenglish + fenglishLetter(current)
+		this.#translateCurrentLetter()
 	}
 
-	return fenglish
-}
+	#isAlef(char) {
+		return ['آ', 'ا'].includes(char)
+	}
 
-/** @summary is it one of `an`, `en`, `on`, `a`, `e`, `o`? */
-const isVowel = (char) => ['ً', 'ٍ', 'ٌ', 'َ', 'ِ', 'ُ'].includes(char)
+	#translateCurrentLetter() {
+		this.#fenglish = this.#fenglish + this.#fenglishLetter(this.#current)
+	}
 
-const isAlef = (char) => ['آ', 'ا'].includes(char)
-
-function fenglishLetter(letter) {
-	return lettersMap[letter] || letter
+	#fenglishLetter(letter) {
+		return lettersMap[letter] || letter
+	}
 }

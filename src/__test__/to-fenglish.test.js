@@ -1,4 +1,4 @@
-import { toFenglish } from '../to-fenglish'
+import { ToFenglish } from '../to-fenglish'
 
 /**
  * @description `X` point to `Consonant` and `Y` point to `Vowel`
@@ -63,7 +63,8 @@ describe('toFenglish for ALEF', () => {
 })
 
 function expectPersianIsFenglish(persian, fenglish) {
-	persian.forEach(
-		(value, i) => expect(toFenglish(value)).toEqual(fenglish[i]),
-	)
+	persian.forEach((value, i) => {
+		const translated = new ToFenglish(value).convert()
+		expect(translated).toEqual(fenglish[i])
+	})
 }
