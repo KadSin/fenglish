@@ -2,12 +2,16 @@
   "name": "fenglish",
   "version": "0.0.1",
   "description": "Fenglish tools",
-  "type": "module",
   "main": "index.js",
   "scripts": {
-    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
-    "test-watch": "node --experimental-vm-modules node_modules/jest/bin/jest.js --watch"
+    "lint": "eslint . --ext .ts",
+    "build": "tsc",
+    "test": "jest",
+    "test-watch": "jest --watch"
   },
+  "files": [
+    "lib/**/*"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/KadSin/fenglish.git"
@@ -32,13 +36,21 @@
   },
   "homepage": "https://github.com/KadSin/fenglish#readme",
   "devDependencies": {
-    "eslint": "^8.21.0",
+    "@types/jest": "^29.2.0",
+    "@typescript-eslint/eslint-plugin": "^5.40.1",
+    "@typescript-eslint/parser": "^5.40.1",
+    "eslint": "^8.25.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-import": "^2.26.0",
-    "jest": "^28.1.3"
+    "prettier": "^2.7.1",
+    "ts-jest": "^29.0.3",
+    "typescript": "^4.8.4"
   },
   "jest": {
     "testEnvironment": "jest-environment-node",
-    "transform": {}
+    "verbose": true,
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    }
   }
 }
