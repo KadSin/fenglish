@@ -2,12 +2,18 @@
   "name": "fenglish",
   "version": "0.0.1",
   "description": "Fenglish tools",
-  "main": "index.js",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "scripts": {
     "lint": "eslint . --ext .ts",
     "build": "tsc",
     "test": "jest",
-    "test-watch": "jest --watch"
+    "test-watch": "jest --watch",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm test && npm run lint",
+    "preversion": "npm run lint",
+    "version": "git add -A src",
+    "postversion": "git push && git push --tags"
   },
   "files": [
     "lib/**/*"
