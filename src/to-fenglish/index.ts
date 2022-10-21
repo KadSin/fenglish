@@ -14,7 +14,7 @@ export class ToFenglish {
 	private word = ''
 
 	constructor(text: string) {
-		this.text = text
+		this.text = text || ''
 	}
 
 	public convert() {
