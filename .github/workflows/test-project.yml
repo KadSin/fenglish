@@ -1,0 +1,22 @@
+name: Test
+
+on:
+    pull_request:
+        branches: ['develop']
+
+jobs:
+    test:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v3
+
+            # Build js
+            - name: Setup Node
+              uses: actions/setup-node@v3
+              with:
+                  node-version: '16.x'
+            - name: Install packages
+              run: npm install
+
+            - name: Execute tests via Jest
+              run: npm test
