@@ -54,6 +54,13 @@ describe('toFenglish for ALEF', () => {
 		)
 	})
 
+	it('Should return empty on null and undefined', () => {
+		expectPersianIsFenglish(
+			[null, undefined],
+			['', ''],
+		)
+	})
+
 	it('Sentence with mix formats should be correct', () => {
 		expectPersianIsFenglish(
 			['بابا با داداش آرَش رازِ آزار با آرامِش دارَند'],
@@ -62,7 +69,7 @@ describe('toFenglish for ALEF', () => {
 	})
 })
 
-function expectPersianIsFenglish(persian: string[], fenglish: string[]) {
+function expectPersianIsFenglish(persian: any[], fenglish: string[]) {
 	persian.forEach((value, i) => {
 		const translated = new ToFenglish(value).convert()
 		expect(translated).toEqual(fenglish[i])
