@@ -1,5 +1,4 @@
 import lettersMap from './letters-map.json'
-<LetterMap>lettersMap
 
 interface LetterMap {
 	[index: string]: string
