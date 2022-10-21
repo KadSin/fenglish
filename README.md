@@ -1,7 +1,5 @@
 # Fenglish
 
-===========
-
 Includes utilities which play with persian texts for Fenglish purposes.
 
 ## Install
@@ -27,4 +25,4 @@ const persian = 'آرامَم مَن!'
 console.log(toFenglish(persian)) // prints `aramam man!`
 ```
 
-_Note that this function works correctly for the letter "A" and not work correctly for other letters yet._ (**Work in progress...**)
+_Note that this function works correctly for the letter "Alef" and not work correctly for other letters yet._ (**Work in progress...**)
