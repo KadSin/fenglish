@@ -4,15 +4,11 @@ Includes utilities which play with persian texts for Fenglish purposes.
 
 ## Install
 
----
-
 ```bash
 npm i fenglish
 ```
 
 ## Usages
-
----
 
 ### `toFenglish`
 
