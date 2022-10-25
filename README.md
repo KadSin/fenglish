@@ -25,4 +25,4 @@ const persian = 'آرامَم مَن!'
 console.log(toFenglish(persian)) // prints `aramam man!`
 ```
 
-_Note that this function works correctly for the letter "Alef" and not work correctly for other letters yet._ (**Work in progress...**)
+_Note that this function works correctly for "Alef" and "Ayn" letters and not work correctly for other letters yet._ (**Work in progress...**)
