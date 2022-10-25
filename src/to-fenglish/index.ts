@@ -1,8 +1,7 @@
-import lettersMap from './letters-map.json'
+import lettersMap from './assets/letters-map'
+import { LetterChecker } from './letter-checker'
 
-interface LetterMap {
-	[index: string]: string
-}
+const { isVowel, isAlef, isAyn } = LetterChecker
 
 export class ToFenglish {
 	private text: string
@@ -39,7 +38,11 @@ export class ToFenglish {
 			this.current = this.word[this.position - 1]
 			this.next = this.word[this.position]
 
-			if (this.isVowel(this.next)) {
+			if(isAyn(this.current)) {
+				continue
+			}
+
+			if (isVowel(this.next)) {
 				this.onNextLetterIsVowel()
 			} else {
 				this.onNextLetterIsNotVowel()
@@ -47,13 +50,8 @@ export class ToFenglish {
 		}
 	}
 
-	/** @summary is it one of `an`, `en`, `on`, `a`, `e`, `o`? */
-	private isVowel(char: string) {
-		return ['ً', 'ٍ', 'ٌ', 'َ', 'ِ', 'ُ'].includes(char)
-	}
-
 	private onNextLetterIsVowel() {
-		if (this.isAlef(this.current)) {
+		if (isAlef(this.current)) {
 			this.current = this.next
 			this.position++
 		}
@@ -63,11 +61,11 @@ export class ToFenglish {
 
 	private onNextLetterIsNotVowel() {
 		if (this.position == 2) {
-			if (this.isAlef(this.current) && this.word.length == 3) {
+			if (isAlef(this.current) && this.word.length == 3) {
 				this.fenglish = this.fenglish + 'a'
 			}
 
-			if (this.isAlef(this.previous) && this.isAlef(this.next) && this.word.length == 4) {
+			if (isAlef(this.previous) && isAlef(this.next) && this.word.length == 4) {
 				this.fenglish = 'a' + this.fenglishLetter(this.current) + 'a'
 				return
 			}
@@ -76,15 +74,11 @@ export class ToFenglish {
 		this.translateCurrentLetter()
 	}
 
-	private isAlef(char: string) {
-		return ['آ', 'ا'].includes(char)
-	}
-
 	private translateCurrentLetter() {
 		this.fenglish = this.fenglish + this.fenglishLetter(this.current)
 	}
 
 	private fenglishLetter(letter: string) {
-		return (<LetterMap>lettersMap)[letter] || letter
+		return lettersMap[letter] || letter
 	}
 }
