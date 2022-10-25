@@ -1,7 +1,7 @@
 import lettersMap from './assets/letters-map'
 import { LetterChecker } from './letter-checker'
 
-const { isVowel, isAlef } = LetterChecker
+const { isVowel, isAlef, isAyn } = LetterChecker
 
 export class ToFenglish {
 	private text: string
@@ -37,6 +37,10 @@ export class ToFenglish {
 			this.previous = this.word[this.position - 2]
 			this.current = this.word[this.position - 1]
 			this.next = this.word[this.position]
+
+			if(isAyn(this.current)) {
+				continue
+			}
 
 			if (isVowel(this.next)) {
 				this.onNextLetterIsVowel()
