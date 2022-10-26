@@ -71,17 +71,33 @@ describe('toFenglish', () => {
 	})
 
 	describe('ayn', () => {
-		it('Word with <AYN + Consonant> format should be `aynC', () => {
+		it('Word containing <AYN + Consonant> format should be `aynC`', () => {
 			expectPersianIsFenglish(
 				['اِعلانات', 'مِعرات', 'مُعادِل', 'عامِل'],
 				['elanat', 'merat', 'moadel', 'amel'],
 			)
 		})
 
-		it('Word with <AYN + Vowel> format should be `aynV', () => {
+		it('Word containing <AYN + Vowel> format should be `aynV`', () => {
 			expectPersianIsFenglish(
 				['مُعَلِم', 'عَلامَت', 'عاشِق', 'عِشق', 'عَمَل', 'عَذاب'],
 				['moalem', 'alamat', 'ashegh', 'eshgh', 'amal', 'azab'],
+			)
+		})
+	})
+
+	describe('vaav', () => {
+		it('Word containing <O + VAAV> format should remove `vaav (Madoole)`', () => {
+			expectPersianIsFenglish(
+				['خُوردَم', 'خُوشگِل', 'خُوراک', 'خُودَم', 'دُو', 'نُوک'],
+				['khordam', 'khoshgel', 'khorak', 'khodam', 'do', 'nok'],
+			)
+		})
+
+		it('Word containing <KH + VAAV + ALEF> format should remove `vaav` (Madoole)', () => {
+			expectPersianIsFenglish(
+				['خواب', 'خواستَم', 'خواف', 'خواهِش', 'خوان'],
+				['khaab', 'khaastam', 'khaaf', 'khaahesh', 'khaan'],
 			)
 		})
 	})
