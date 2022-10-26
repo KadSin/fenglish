@@ -17,4 +17,8 @@ export class LetterChecker {
 	public static isAyn(char: string) {
 		return char == 'ع'
 	}
+
+	public static isVaav(char: string) {
+		return char == 'و'
+	}
 }

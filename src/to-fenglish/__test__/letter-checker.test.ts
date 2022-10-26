@@ -48,4 +48,10 @@ describe('LetterChecker', () => {
 			expect(LetterChecker.isAyn('ع')).toBeTruthy()
 		})
 	})
+
+	describe('isVaav', () => {
+		it('Should identify `vaav`', () => {
+			expect(LetterChecker.isVaav('و')).toBeTruthy()
+		})
+	})
 })
