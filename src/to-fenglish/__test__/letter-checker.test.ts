@@ -27,6 +27,12 @@ describe('LetterChecker', () => {
 		})
 	})
 
+	describe('isO', () => {
+		it('Should identify `o`', () => {
+			expect(LetterChecker.isO('ُ')).toBeTruthy()
+		})
+	})
+
 	describe('isAlef', () => {
 		it('Should identify `a` as `alef`', () => {
 			expect(LetterChecker.isAlef('ا')).toBeTruthy()
