@@ -21,4 +21,8 @@ export class LetterChecker {
 	public static isVaav(char: string) {
 		return char == 'و'
 	}
+
+	public static isKhaa(text: string) {
+		return text == 'خوا'
+	}
 }

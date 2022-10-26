@@ -54,4 +54,10 @@ describe('LetterChecker', () => {
 			expect(LetterChecker.isVaav('و')).toBeTruthy()
 		})
 	})
+
+	describe('isKhaa', () => {
+		it('Should identify `khaa`', () => {
+			expect(LetterChecker.isKhaa('خوا')).toBeTruthy()
+		})
+	})
 })
