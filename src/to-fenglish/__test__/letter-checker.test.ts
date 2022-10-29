@@ -43,12 +43,6 @@ describe('LetterChecker', () => {
 		})
 	})
 
-	describe('isAyn', () => {
-		it('Should identify `ayn`', () => {
-			expect(LetterChecker.isAyn('ع')).toBeTruthy()
-		})
-	})
-
 	describe('isVaav', () => {
 		it('Should identify `vaav`', () => {
 			expect(LetterChecker.isVaav('و')).toBeTruthy()
