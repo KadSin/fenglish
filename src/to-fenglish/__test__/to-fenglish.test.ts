@@ -100,6 +100,13 @@ describe('toFenglish', () => {
 				['khaab', 'khaastam', 'khaaf', 'khaahesh', 'khaan'],
 			)
 		})
+
+		it('Word containing <VAAV + VAAV> format should be `oo`', () => { // mahoor
+			expectPersianIsFenglish(
+				['کاووس', 'طاووس', 'داوود'],
+				['kavoos', 'tavoos', 'davood'],
+			)
+		})
 	})
 })
 

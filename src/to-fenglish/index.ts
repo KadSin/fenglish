@@ -78,6 +78,11 @@ export class ToFenglish {
 	}
 
 	private onCurrentLetterIsVaav() {
+		if(isVaav(this.previous)) {
+			this.fenglish = this.fenglish + 'oo'
+			return
+		}
+
 		if(isKhaa(this.previous + this.current + this.next)) {
 			this.fenglish = this.fenglish + 'a'
 			return
