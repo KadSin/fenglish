@@ -49,7 +49,7 @@ export class ToFenglish {
 				continue
 			}
 
-			if(isVaav(this.current)) {
+			if(isVaav(this.current) && this.position !== 1) {
 				this.onCurrentLetterIsVaav()
 				continue
 			}

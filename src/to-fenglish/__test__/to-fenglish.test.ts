@@ -114,6 +114,13 @@ describe('toFenglish', () => {
 				['mahoor', 'paboos', 'kaboos', 'karoon', 'nooh', 'rooh'],
 			)
 		})
+
+		it('Word containing <VAAV + ...> should not get change', () => {
+			expectPersianIsFenglish(
+				['والا', 'وِستِرن', 'وِرد', 'واچ', 'وان', 'وَسایِل', 'وَمپایِر', 'وَقتِش', 'وُشُو'],
+				['vala', 'vestern', 'verd', 'vaach', 'vaan', 'vasayel', 'vampayer', 'vaghtesh', 'vosho'],
+			)
+		})
 	})
 })
 
