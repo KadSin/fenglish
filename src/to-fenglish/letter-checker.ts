@@ -2,8 +2,16 @@ export class LetterChecker {
 	/**
 	 * @summary is it one of `an`, `en`, `on`, `a`, `e`, `o`?
 	 */
-	public static isVowel(char: string) {
+	public static isShortVowel(char: string) {
 		return ['ً', 'ٍ', 'ٌ', 'َ', 'ِ', 'ُ'].includes(char)
+	}
+
+	public static isLongVowel(char: string) {
+		return ['ا', 'أ', 'و'].includes(char)
+	}
+
+	public static isVowel(char: string) {
+		return LetterChecker.isShortVowel(char) || LetterChecker.isLongVowel(char)
 	}
 
 	public static isO(char: string) {

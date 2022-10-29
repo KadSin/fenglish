@@ -89,8 +89,8 @@ describe('toFenglish', () => {
 	describe('vaav', () => {
 		it('Word containing <O + VAAV> format should remove `vaav (Madoole)`', () => {
 			expectPersianIsFenglish(
-				['خُوردَم', 'خُوشگِل', 'خُوراک', 'خُودَم', 'دُو', 'نُوک'],
-				['khordam', 'khoshgel', 'khorak', 'khodam', 'do', 'nok'],
+				['خُوردَم', 'خُوشگِل', 'خُوراک', 'خُودَم', 'دُو', 'نُوک', 'پُلُو'],
+				['khordam', 'khoshgel', 'khorak', 'khodam', 'do', 'nok', 'polo'],
 			)
 		})
 
@@ -101,10 +101,17 @@ describe('toFenglish', () => {
 			)
 		})
 
-		it('Word containing <VAAV + VAAV> format should be `oo`', () => { // mahoor
+		it('Word containing <VAAV + VAAV> format should be `oo`', () => {
 			expectPersianIsFenglish(
 				['کاووس', 'طاووس', 'داوود'],
 				['kavoos', 'tavoos', 'davood'],
+			)
+		})
+
+		it('Word containing <Consonant + VAAV + Consonant> format should be `CooC`', () => {
+			expectPersianIsFenglish(
+				['ماهور', 'پابوس', 'کابوس', 'کارون', 'نوح', 'روح'],
+				['mahoor', 'paboos', 'kaboos', 'karoon', 'nooh', 'rooh'],
 			)
 		})
 	})
