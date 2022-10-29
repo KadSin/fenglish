@@ -5,6 +5,15 @@ import { ToFenglish } from '../index'
  */
 
 describe('toFenglish', () => {
+	describe('Other value types', () => {
+		it('Should return empty on null and undefined', () => {
+			expectPersianIsFenglish(
+				[null, undefined],
+				['', ''],
+			)
+		})
+	})
+
 	describe('alef', () => {
 		it('Should overwrite the alef by next vowel', () => {
 			expectPersianIsFenglish(
@@ -52,13 +61,6 @@ describe('toFenglish', () => {
 			expectPersianIsFenglish(
 				['بابا', 'داداش', 'بَرادَر', 'باران', 'آب', 'بَها', 'مأوا', 'راشِد', 'کاتِر', 'داماد', 'رَوان'],
 				['baba', 'dadash', 'baradar', 'baran', 'ab', 'baha', 'ma\'va', 'rashed', 'kater', 'damad', 'ravan'],
-			)
-		})
-
-		it('Should return empty on null and undefined', () => {
-			expectPersianIsFenglish(
-				[null, undefined],
-				['', ''],
 			)
 		})
 
