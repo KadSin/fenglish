@@ -5,6 +5,15 @@ import { ToFenglish } from '../index'
  */
 
 describe('toFenglish', () => {
+	describe('Other value types', () => {
+		it('Should return empty on null and undefined', () => {
+			expectPersianIsFenglish(
+				[null, undefined],
+				['', ''],
+			)
+		})
+	})
+
 	describe('alef', () => {
 		it('Should overwrite the alef by next vowel', () => {
 			expectPersianIsFenglish(
@@ -55,13 +64,6 @@ describe('toFenglish', () => {
 			)
 		})
 
-		it('Should return empty on null and undefined', () => {
-			expectPersianIsFenglish(
-				[null, undefined],
-				['', ''],
-			)
-		})
-
 		it('Sentence with mix formats should be correct', () => {
 			expectPersianIsFenglish(
 				['بابا با داداش آرَش رازِ آزار با آرامِش دارَند'],
@@ -71,17 +73,54 @@ describe('toFenglish', () => {
 	})
 
 	describe('ayn', () => {
-		it('Word with <AYN + Consonant> format should be `aynC', () => {
+		it('Word containing <AYN + Consonant> format should be `aynC`', () => {
 			expectPersianIsFenglish(
 				['اِعلانات', 'مِعرات', 'مُعادِل', 'عامِل'],
 				['elanat', 'merat', 'moadel', 'amel'],
 			)
 		})
 
-		it('Word with <AYN + Vowel> format should be `aynV', () => {
+		it('Word containing <AYN + Vowel> format should be `aynV`', () => {
 			expectPersianIsFenglish(
 				['مُعَلِم', 'عَلامَت', 'عاشِق', 'عِشق', 'عَمَل', 'عَذاب'],
 				['moalem', 'alamat', 'ashegh', 'eshgh', 'amal', 'azab'],
+			)
+		})
+	})
+
+	describe('vaav', () => {
+		it('Word containing <O + VAAV> format should remove `vaav (Madoole)`', () => {
+			expectPersianIsFenglish(
+				['خُوردَم', 'خُوشگِل', 'خُوراک', 'خُودَم', 'دُو', 'نُوک', 'پُلُو'],
+				['khordam', 'khoshgel', 'khorak', 'khodam', 'do', 'nok', 'polo'],
+			)
+		})
+
+		it('Word containing <KH + VAAV + ALEF> format should remove `vaav` (Madoole)', () => {
+			expectPersianIsFenglish(
+				['خواب', 'خواستَم', 'خواف', 'خواهِش', 'خوان'],
+				['khaab', 'khaastam', 'khaaf', 'khaahesh', 'khaan'],
+			)
+		})
+
+		it('Word containing <VAAV + VAAV> format should be `oo`', () => {
+			expectPersianIsFenglish(
+				['کاووس', 'طاووس', 'داوود'],
+				['kavoos', 'tavoos', 'davood'],
+			)
+		})
+
+		it('Word containing <Consonant + VAAV + Consonant> format should be `CooC`', () => {
+			expectPersianIsFenglish(
+				['ماهور', 'پابوس', 'کابوس', 'کارون', 'نوح', 'روح'],
+				['mahoor', 'paboos', 'kaboos', 'karoon', 'nooh', 'rooh'],
+			)
+		})
+
+		it('Word containing <VAAV + ...> should not get change', () => {
+			expectPersianIsFenglish(
+				['والا', 'وِستِرن', 'وِرد', 'واچ', 'وان', 'وَسایِل', 'وَمپایِر', 'وَقتِش', 'وُشُو'],
+				['vala', 'vestern', 'verd', 'vaach', 'vaan', 'vasayel', 'vampayer', 'vaghtesh', 'vosho'],
 			)
 		})
 	})

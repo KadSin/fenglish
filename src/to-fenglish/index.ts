@@ -1,7 +1,7 @@
 import lettersMap from './assets/letters-map'
 import { LetterChecker } from './letter-checker'
 
-const { isVowel, isAlef, isAyn } = LetterChecker
+const { isShortVowel, isVowel, isO, isAlef, isVaav, isKhaa } = LetterChecker
 
 export class ToFenglish {
 	private text: string
@@ -33,25 +33,43 @@ export class ToFenglish {
 	private byWord() {
 		this.fenglish = ''
 
+		// if word's format is <ALEF (may exists) + LETTER + ALEF + LETTER>
+		if(/^(آ|ا){0,1}.(آ|ا).$/.test(this.word)) {
+			this.onWordShouldHaveTwoA()
+			return
+		}
+
 		for (this.position = 1; this.position <= this.word.length; this.position++) {
 			this.previous = this.word[this.position - 2]
 			this.current = this.word[this.position - 1]
 			this.next = this.word[this.position]
 
-			if(isAyn(this.current)) {
+			if(isAlef(this.current)) {
+				this.onCurrentLetterIsAlef()
 				continue
 			}
 
-			if (isVowel(this.next)) {
-				this.onNextLetterIsVowel()
-			} else {
-				this.onNextLetterIsNotVowel()
+			if(isVaav(this.current) && this.position !== 1) {
+				this.onCurrentLetterIsVaav()
+				continue
 			}
+
+			this.translateCurrentLetter()
 		}
 	}
 
-	private onNextLetterIsVowel() {
-		if (isAlef(this.current)) {
+	private onWordShouldHaveTwoA() {
+		const firstLetter = 'a'.repeat(this.word.length - 3)
+
+		const fenglishLetterIndexOf = (index:number) => this.fenglishLetter(this.word.substring(index, index + 1))
+		const firstNonAlef = fenglishLetterIndexOf(this.word.length - 3)
+		const secondNonAlef = fenglishLetterIndexOf(this.word.length - 1)
+
+		this.fenglish = `${ firstLetter }${ firstNonAlef }aa${ secondNonAlef }`
+	}
+
+	private onCurrentLetterIsAlef() {
+		if (isShortVowel(this.next)) {
 			this.current = this.next
 			this.position++
 		}
@@ -59,16 +77,22 @@ export class ToFenglish {
 		this.translateCurrentLetter()
 	}
 
-	private onNextLetterIsNotVowel() {
-		if (this.position == 2) {
-			if (isAlef(this.current) && this.word.length == 3) {
-				this.fenglish = this.fenglish + 'a'
-			}
+	private onCurrentLetterIsVaav() {
+		if(isO(this.previous)) {
+			return
+		}
 
-			if (isAlef(this.previous) && isAlef(this.next) && this.word.length == 4) {
-				this.fenglish = 'a' + this.fenglishLetter(this.current) + 'a'
-				return
-			}
+		if(isKhaa(this.previous + this.current + this.next)) {
+			this.fenglish = this.fenglish + 'a'
+			return
+		}
+
+		if(
+			isVaav(this.previous) ||
+			!(isVowel(this.previous) && isVowel(this.next))
+		) {
+			this.fenglish = this.fenglish + 'oo'
+			return
 		}
 
 		this.translateCurrentLetter()
@@ -79,6 +103,7 @@ export class ToFenglish {
 	}
 
 	private fenglishLetter(letter: string) {
-		return lettersMap[letter] || letter
+		const translated = lettersMap[letter]
+		return translated == undefined ? letter : translated
 	}
 }
