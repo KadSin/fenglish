@@ -29,4 +29,8 @@ export class LetterChecker {
 	public static isKhaa(text: string) {
 		return text == 'خوا'
 	}
+
+	public static isYe(char: string) {
+		return char == 'ی'
+	}
 }

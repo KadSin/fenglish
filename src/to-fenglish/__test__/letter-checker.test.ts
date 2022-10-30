@@ -1,6 +1,6 @@
 import { LetterChecker } from '../letter-checker'
 
-const { isShortVowel, isLongVowel, isVowel, isAlef, isO, isKhaa, isVaav } = LetterChecker
+const { isShortVowel, isLongVowel, isVowel, isAlef, isO, isKhaa, isVaav, isYe } = LetterChecker
 
 describe('LetterChecker', () => {
 	describe('isShortVowel', () => {
@@ -98,6 +98,12 @@ describe('LetterChecker', () => {
 	describe('isKhaa', () => {
 		it('Should identify `khaa`', () => {
 			expect(isKhaa('خوا')).toBeTruthy()
+		})
+	})
+
+	describe('isYe', () => {
+		it('Should identify `ye`', () => {
+			expect(isYe('ی')).toBeTruthy()
 		})
 	})
 })
