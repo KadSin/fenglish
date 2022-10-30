@@ -31,15 +31,15 @@ describe('toFenglish', () => {
 
 		it('Word with <Consonant + ALEF vowel + Consonant> format should be `CaaC`', () => {
 			expectPersianIsFenglish(
-				['خام', 'بام', 'فال', 'طاق', 'راز', 'لات'],
-				['khaam', 'baam', 'faal', 'taagh', 'raaz', 'laat'],
+				['خام', 'بام', 'فال', 'طاق', 'راز', 'لات', 'یات', 'یار', 'رای'],
+				['khaam', 'baam', 'faal', 'taagh', 'raaz', 'laat', 'yaat', 'yaar', 'raay'],
 			)
 		})
 
 		it('Word with <A_BA_KOLAH + Consonant + ALEF vowel + Consonant> format should be `aCaa`', () => {
 			expectPersianIsFenglish(
-				['آثار', 'آزار', 'آرام', 'آباد', 'آداب'],
-				['asaar', 'azaar', 'araam', 'abaad', 'adaab'],
+				['آثار', 'آزار', 'آرام', 'آباد', 'آداب', 'آیات', 'آرای'],
+				['asaar', 'azaar', 'araam', 'abaad', 'adaab', 'ayaat', 'araay'],
 			)
 		})
 
@@ -124,9 +124,39 @@ describe('toFenglish', () => {
 			)
 		})
 	})
+
+	describe('ye', () => {
+		it('Word start with <ALEF + YE> format should be `i`', () => {
+			expectPersianIsFenglish(
+				['ایران', 'ایرادات', 'ایثار', 'ایمان', 'اینها', 'اینبار', 'ایشالا', 'ایستگاه', 'ایست', 'ایرَوان', 'ایشان'],
+				['iran', 'iradat', 'isar', 'iman', 'inha', 'inbar', 'ishala', 'istgah', 'ist', 'iravan', 'ishan'],
+			)
+		})
+
+		it('Word containing <YE + Consonant> format should be `iC`', () => {
+			expectPersianIsFenglish(
+				['دیر', 'شیر', 'کیش', 'ریشکا', 'میچکا', 'رَحیم', 'ماشین', 'پاچیدَم', 'چیست', 'میزارَم'],
+				['dir', 'shir', 'kish', 'rishka', 'michka', 'rahim', 'mashin', 'pachidam', 'chist', 'mizaram'],
+			)
+		})
+
+		it('Word ended with <Consonant + YE> format should be `Ci`', () => {
+			expectPersianIsFenglish(
+				['کَدخُدائی', 'اَبریشَمی', 'اَسلَمی', 'عَلیخانی'],
+				['kadkhodaei', 'abrishami', 'aslami', 'alikhani'],
+			)
+		})
+
+		it('Word started with <YE + Vowel> format should be `yV`', () => {
+			expectPersianIsFenglish(
+				['یاوَر', 'یاشار', 'یَواش', 'یِکی', 'یاسِر', 'یُهَنا', 'یَزید', 'یوری'],
+				['yavar', 'yashar', 'yavash', 'yeki', 'yaser', 'yohana', 'yazid', 'yoori'],
+			)
+		})
+	})
 })
 
-function expectPersianIsFenglish(persian: any[], fenglish: string[]) {
+function expectPersianIsFenglish(persian: Array<string|null|undefined>, fenglish: string[]) {
 	persian.forEach((value, i) => {
 		const translated = new ToFenglish(value).convert()
 		expect(translated).toEqual(fenglish[i])

@@ -1,7 +1,7 @@
 import lettersMap from './assets/letters-map'
 import { LetterChecker } from './letter-checker'
 
-const { isShortVowel, isVowel, isO, isAlef, isVaav, isKhaa } = LetterChecker
+const { isShortVowel, isVowel, isO, isAlef, isVaav, isKhaa, isYe } = LetterChecker
 
 export class ToFenglish {
 	private text: string
@@ -12,7 +12,7 @@ export class ToFenglish {
 	private next = ''
 	private word = ''
 
-	constructor(text: string) {
+	constructor(text: string|null|undefined) {
 		this.text = text || ''
 	}
 
@@ -54,6 +54,11 @@ export class ToFenglish {
 				continue
 			}
 
+			if(isYe(this.current)) {
+				this.onCurrentLetterIsYe()
+				continue
+			}
+
 			this.translateCurrentLetter()
 		}
 	}
@@ -69,9 +74,11 @@ export class ToFenglish {
 	}
 
 	private onCurrentLetterIsAlef() {
-		if (isShortVowel(this.next)) {
-			this.current = this.next
-			this.position++
+		if (
+			isShortVowel(this.next) ||
+			(isYe(this.next) && this.position == 1)
+		) {
+			return
 		}
 
 		this.translateCurrentLetter()
@@ -92,6 +99,15 @@ export class ToFenglish {
 			!(isVowel(this.previous) && isVowel(this.next))
 		) {
 			this.fenglish = this.fenglish + 'oo'
+			return
+		}
+
+		this.translateCurrentLetter()
+	}
+
+	private onCurrentLetterIsYe() {
+		if (!isVowel(this.next)) {
+			this.fenglish = this.fenglish + 'i'
 			return
 		}
 
