@@ -94,6 +94,11 @@ export class ToFenglish {
 			return
 		}
 
+		if(isAlef(this.previous) && !isVowel(this.next)) {
+			this.fenglish = this.fenglish.substring(0, this.position - 2) + 'oo'
+			return
+		}
+
 		if(
 			isVaav(this.previous) ||
 			!(isVowel(this.previous) && isVowel(this.next))

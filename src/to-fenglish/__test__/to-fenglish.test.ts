@@ -117,6 +117,13 @@ describe('toFenglish', () => {
 			)
 		})
 
+		it('Word containing <ALEF + VAAV> format should be `oo`', () => {
+			expectPersianIsFenglish(
+				['اوف', 'اون', 'اوخ', 'اوستا', 'او', 'اونجا'],
+				['oof', 'oon', 'ookh', 'oosta', 'oo', 'oonja'],
+			)
+		})
+
 		it('Word containing <VAAV + ...> should not get change', () => {
 			expectPersianIsFenglish(
 				['والا', 'وِستِرن', 'وِرد', 'واچ', 'وان', 'وَسایِل', 'وَمپایِر', 'وَقتِش', 'وُشُو'],
