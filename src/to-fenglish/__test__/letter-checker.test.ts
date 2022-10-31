@@ -37,6 +37,10 @@ describe('LetterChecker', () => {
 		it('Should identify `hamze` as a `vowel`', () => {
 			expect(isLongVowel('أ')).toBeTruthy()
 		})
+
+		it('Should identify `ی` as a `vowel`', () => {
+			expect(isLongVowel('ی')).toBeTruthy()
+		})
 	})
 
 	describe('isVowel', () => {
@@ -70,6 +74,10 @@ describe('LetterChecker', () => {
 
 		it('Should identify `hamze` as a `vowel`', () => {
 			expect(isVowel('أ')).toBeTruthy()
+		})
+
+		it('Should identify `ی` as a `vowel`', () => {
+			expect(isVowel('ی')).toBeTruthy()
 		})
 	})
 
