@@ -7,7 +7,7 @@ export class LetterChecker {
 	}
 
 	public static isLongVowel(char: string) {
-		return ['ا', 'أ', 'و'].includes(char)
+		return ['ا', 'أ', 'و', 'ی'].includes(char)
 	}
 
 	public static isVowel(char: string) {
@@ -28,5 +28,9 @@ export class LetterChecker {
 
 	public static isKhaa(text: string) {
 		return text == 'خوا'
+	}
+
+	public static isYe(char: string) {
+		return char == 'ی'
 	}
 }

@@ -1,7 +1,7 @@
 import lettersMap from './assets/letters-map'
 import { LetterChecker } from './letter-checker'
 
-const { isShortVowel, isVowel, isO, isAlef, isVaav, isKhaa } = LetterChecker
+const { isLongVowel, isShortVowel, isVowel, isO, isAlef, isVaav, isKhaa, isYe } = LetterChecker
 
 export class ToFenglish {
 	private text: string
@@ -12,7 +12,7 @@ export class ToFenglish {
 	private next = ''
 	private word = ''
 
-	constructor(text: string) {
+	constructor(text: string|null|undefined) {
 		this.text = text || ''
 	}
 
@@ -54,6 +54,11 @@ export class ToFenglish {
 				continue
 			}
 
+			if(isYe(this.current)) {
+				this.onCurrentLetterIsYe()
+				continue
+			}
+
 			this.translateCurrentLetter()
 		}
 	}
@@ -69,9 +74,11 @@ export class ToFenglish {
 	}
 
 	private onCurrentLetterIsAlef() {
-		if (isShortVowel(this.next)) {
-			this.current = this.next
-			this.position++
+		if (
+			isShortVowel(this.next) ||
+			(isYe(this.next) && this.position == 1)
+		) {
+			return
 		}
 
 		this.translateCurrentLetter()
@@ -83,7 +90,12 @@ export class ToFenglish {
 		}
 
 		if(isKhaa(this.previous + this.current + this.next)) {
-			this.fenglish = this.fenglish + 'a'
+			this.fenglish += 'a'
+			return
+		}
+
+		if(isAlef(this.previous) && !isVowel(this.next)) {
+			this.fenglish = this.fenglish.substring(0, this.position - 2) + 'oo'
 			return
 		}
 
@@ -91,7 +103,25 @@ export class ToFenglish {
 			isVaav(this.previous) ||
 			!(isVowel(this.previous) && isVowel(this.next))
 		) {
-			this.fenglish = this.fenglish + 'oo'
+			this.fenglish += 'oo'
+			return
+		}
+
+		this.translateCurrentLetter()
+	}
+
+	private onCurrentLetterIsYe() {
+		if (isYe(this.next)) {
+			this.fenglish += 'yee'
+			this.position++
+			return
+		}
+
+		if (
+			(isLongVowel(this.next) && this.position != 1) ||
+			(!isVowel(this.next) && !isShortVowel(this.previous))
+		) {
+			this.fenglish += 'i'
 			return
 		}
 
@@ -99,7 +129,7 @@ export class ToFenglish {
 	}
 
 	private translateCurrentLetter() {
-		this.fenglish = this.fenglish + this.fenglishLetter(this.current)
+		this.fenglish += this.fenglishLetter(this.current)
 	}
 
 	private fenglishLetter(letter: string) {

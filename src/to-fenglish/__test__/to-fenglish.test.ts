@@ -31,15 +31,15 @@ describe('toFenglish', () => {
 
 		it('Word with <Consonant + ALEF vowel + Consonant> format should be `CaaC`', () => {
 			expectPersianIsFenglish(
-				['خام', 'بام', 'فال', 'طاق', 'راز', 'لات'],
-				['khaam', 'baam', 'faal', 'taagh', 'raaz', 'laat'],
+				['خام', 'بام', 'فال', 'طاق', 'راز', 'لات', 'یات', 'یار', 'رای'],
+				['khaam', 'baam', 'faal', 'taagh', 'raaz', 'laat', 'yaat', 'yaar', 'raay'],
 			)
 		})
 
 		it('Word with <A_BA_KOLAH + Consonant + ALEF vowel + Consonant> format should be `aCaa`', () => {
 			expectPersianIsFenglish(
-				['آثار', 'آزار', 'آرام', 'آباد', 'آداب'],
-				['asaar', 'azaar', 'araam', 'abaad', 'adaab'],
+				['آثار', 'آزار', 'آرام', 'آباد', 'آداب', 'آیات', 'آرای'],
+				['asaar', 'azaar', 'araam', 'abaad', 'adaab', 'ayaat', 'araay'],
 			)
 		})
 
@@ -117,6 +117,13 @@ describe('toFenglish', () => {
 			)
 		})
 
+		it('Word containing <ALEF + VAAV> format should be `oo`', () => {
+			expectPersianIsFenglish(
+				['اوف', 'اون', 'اوخ', 'اوستا', 'او', 'اونجا'],
+				['oof', 'oon', 'ookh', 'oosta', 'oo', 'oonja'],
+			)
+		})
+
 		it('Word containing <VAAV + ...> should not get change', () => {
 			expectPersianIsFenglish(
 				['والا', 'وِستِرن', 'وِرد', 'واچ', 'وان', 'وَسایِل', 'وَمپایِر', 'وَقتِش', 'وُشُو'],
@@ -124,9 +131,60 @@ describe('toFenglish', () => {
 			)
 		})
 	})
+
+	describe('ye', () => {
+		it('Word start with <ALEF + YE> format should be `i`', () => {
+			expectPersianIsFenglish(
+				['ایران', 'ایرادات', 'ایثار', 'ایمان', 'اینها', 'اینبار', 'ایشالا', 'ایستگاه', 'ایست', 'ایرَوان', 'ایشان'],
+				['iran', 'iradat', 'isar', 'iman', 'inha', 'inbar', 'ishala', 'istgah', 'ist', 'iravan', 'ishan'],
+			)
+		})
+
+		it('Word containing <YE + Consonant> format should be `iC`', () => {
+			expectPersianIsFenglish(
+				['دیر', 'شیر', 'کیش', 'ریشکا', 'میچکا', 'رَحیم', 'ماشین', 'پاچیدَم', 'چیست', 'میزارَم'],
+				['dir', 'shir', 'kish', 'rishka', 'michka', 'rahim', 'mashin', 'pachidam', 'chist', 'mizaram'],
+			)
+		})
+
+		it('Word ended with <Consonant + YE> format should be `Ci`', () => {
+			expectPersianIsFenglish(
+				['اَبریشَمی', 'اَسلَمی', 'عَلیخانی', 'رامین', 'دیوار'],
+				['abrishami', 'aslami', 'alikhani', 'ramin', 'divar'],
+			)
+		})
+
+		it('Word started with <YE + Vowel> format should be `yV`', () => {
+			expectPersianIsFenglish(
+				['یاوَر', 'یاشار', 'یَواش', 'یِکی', 'یاسِر', 'یُهَنا', 'یَزید', 'یوری'],
+				['yavar', 'yashar', 'yavash', 'yeki', 'yaser', 'yohana', 'yazid', 'yoori'],
+			)
+		})
+
+		it('Word contains <YE + YE> format should be `yee`', () => {
+			expectPersianIsFenglish(
+				['مایی', 'پایین', 'لایی', 'چایی', 'بابایی', 'آقاییم', 'زاییدی'],
+				['mayee', 'payeen', 'layee', 'chayee', 'babayee', 'aghayeem', 'zayeedi'],
+			)
+		})
+
+		it('Word contains <Vowel + YE> format should be `Vy`', () => {
+			expectPersianIsFenglish(
+				['بَحرِین', 'کِی', 'حُسِین', 'درِیل', 'رِیل', 'شِیدا', 'شِیک', 'جِیران', 'کِیهان', 'مِیدان', 'پِیدا'],
+				['bahreyn', 'key', 'hoseyn', 'dreyl', 'reyl', 'sheyda', 'sheyk', 'jeyran', 'keyhan', 'meydan', 'peyda'],
+			)
+		})
+
+		it('Word contains <YE + ALEF> format should be `ia`', () => {
+			expectPersianIsFenglish(
+				['بیا', 'ریا', 'میام', 'شیار', 'خیار', 'نِمیام', 'سیاه', 'آیات'],
+				['bia', 'ria', 'miam', 'shiar', 'khiar', 'nemiam', 'siah', 'ayaat'],
+			)
+		})
+	})
 })
 
-function expectPersianIsFenglish(persian: any[], fenglish: string[]) {
+function expectPersianIsFenglish(persian: Array<string|null|undefined>, fenglish: string[]) {
 	persian.forEach((value, i) => {
 		const translated = new ToFenglish(value).convert()
 		expect(translated).toEqual(fenglish[i])
