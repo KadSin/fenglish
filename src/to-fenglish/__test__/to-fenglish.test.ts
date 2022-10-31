@@ -149,8 +149,8 @@ describe('toFenglish', () => {
 
 		it('Word ended with <Consonant + YE> format should be `Ci`', () => {
 			expectPersianIsFenglish(
-				['اَبریشَمی', 'اَسلَمی', 'عَلیخانی', 'رامین'],
-				['abrishami', 'aslami', 'alikhani', 'ramin'],
+				['اَبریشَمی', 'اَسلَمی', 'عَلیخانی', 'رامین', 'دیوار'],
+				['abrishami', 'aslami', 'alikhani', 'ramin', 'divar'],
 			)
 		})
 
@@ -172,6 +172,13 @@ describe('toFenglish', () => {
 			expectPersianIsFenglish(
 				['بَحرِین', 'کِی', 'حُسِین', 'درِیل', 'رِیل', 'شِیدا', 'شِیک', 'جِیران', 'کِیهان', 'مِیدان', 'پِیدا'],
 				['bahreyn', 'key', 'hoseyn', 'dreyl', 'reyl', 'sheyda', 'sheyk', 'jeyran', 'keyhan', 'meydan', 'peyda'],
+			)
+		})
+
+		it('Word contains <YE + ALEF> format should be `ia`', () => {
+			expectPersianIsFenglish(
+				['بیا', 'ریا', 'میام', 'شیار', 'خیار', 'نِمیام', 'سیاه', 'آیات'],
+				['bia', 'ria', 'miam', 'shiar', 'khiar', 'nemiam', 'siah', 'ayaat'],
 			)
 		})
 	})
