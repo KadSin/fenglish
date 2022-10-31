@@ -90,7 +90,7 @@ export class ToFenglish {
 		}
 
 		if(isKhaa(this.previous + this.current + this.next)) {
-			this.fenglish = this.fenglish + 'a'
+			this.fenglish += 'a'
 			return
 		}
 
@@ -98,7 +98,7 @@ export class ToFenglish {
 			isVaav(this.previous) ||
 			!(isVowel(this.previous) && isVowel(this.next))
 		) {
-			this.fenglish = this.fenglish + 'oo'
+			this.fenglish += 'oo'
 			return
 		}
 
@@ -107,7 +107,7 @@ export class ToFenglish {
 
 	private onCurrentLetterIsYe() {
 		if (!isVowel(this.next)) {
-			this.fenglish = this.fenglish + 'i'
+			this.fenglish += 'i'
 			return
 		}
 
@@ -115,7 +115,7 @@ export class ToFenglish {
 	}
 
 	private translateCurrentLetter() {
-		this.fenglish = this.fenglish + this.fenglishLetter(this.current)
+		this.fenglish += this.fenglishLetter(this.current)
 	}
 
 	private fenglishLetter(letter: string) {
