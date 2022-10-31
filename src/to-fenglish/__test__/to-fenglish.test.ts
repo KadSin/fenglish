@@ -160,6 +160,13 @@ describe('toFenglish', () => {
 				['mayee', 'payeen', 'layee', 'chayee', 'babayee', 'aghayeem', 'zayeedi'],
 			)
 		})
+
+		it('Word contains <Vowel + YE> format should be `Vy`', () => {
+			expectPersianIsFenglish(
+				['بَحرِین', 'کِی', 'حُسِین', 'درِیل', 'رِیل', 'شِیدا', 'شِیک', 'جِیران', 'کِیهان', 'مِیدان', 'پِیدا'],
+				['bahreyn', 'key', 'hoseyn', 'dreyl', 'reyl', 'sheyda', 'sheyk', 'jeyran', 'keyhan', 'meydan', 'peyda'],
+			)
+		})
 	})
 })
 

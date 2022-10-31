@@ -106,6 +106,11 @@ export class ToFenglish {
 	}
 
 	private onCurrentLetterIsYe() {
+		if (isShortVowel(this.previous)) {
+			this.fenglish += 'y'
+			return
+		}
+
 		if (isYe(this.next)) {
 			this.fenglish += 'yee'
 			this.position++
