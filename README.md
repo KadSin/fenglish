@@ -22,7 +22,7 @@ This function takes a `Persian` text and returns its `Fenglish` text.
 **Notes:**
 
 -   Vowels are effective in the output of this function
--   _This function works correctly for "Alef", "Ayn" and "Vaav" letters and not work correctly for other letters yet._ (**Work in progress...**)
+-   _This function works correctly for "Alef", "Ayn", "Vaav" and "Ye" letters and not work correctly for other letters yet._ (**Work in progress...**)
 
 #### Example
 
