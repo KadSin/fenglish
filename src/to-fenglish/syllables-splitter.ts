@@ -1,13 +1,11 @@
 import { LetterChecker } from './letter-checker'
-const { isShortVowel, isVowel } = LetterChecker
+const { isConsonant, isVowel } = LetterChecker
 
 export function syllablesSplitter(word: string) {
 	let remaining = word
 	const syllables = []
 
 	while(remaining.length > 0) {
-		console.log(syllables, remaining)
-
 		let chunk = remaining.slice(-2)
 		if(isConsonant(chunk[0]) && isVowel(chunk[1])) {
 			syllables.unshift(chunk)
@@ -34,8 +32,4 @@ export function syllablesSplitter(word: string) {
 	}
 
 	return syllables
-}
-
-function isConsonant(letter: string) {
-	return !isShortVowel(letter) && letter != undefined
 }

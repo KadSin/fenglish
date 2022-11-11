@@ -1,7 +1,7 @@
 import lettersMap from './assets/letters-map'
 import { LetterChecker } from './letter-checker'
 
-const { isLongVowel, isShortVowel, isVowel, isO, isAlef, isVaav, isKhaa, isYe } = LetterChecker
+const { isLongVowel, isShortVowel, isConsonant, isVowel, isO, isAlef, isVaav, isKhaa, isYe } = LetterChecker
 
 export class ToFenglish {
 	private text: string
@@ -119,7 +119,7 @@ export class ToFenglish {
 
 		if (
 			(isLongVowel(this.next) && this.position != 1) ||
-			(!isVowel(this.next) && !isShortVowel(this.previous))
+			(!isVowel(this.next) && isConsonant(this.previous))
 		) {
 			this.fenglish += 'i'
 			return
