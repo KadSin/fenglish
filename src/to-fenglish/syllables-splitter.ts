@@ -6,22 +6,22 @@ export function syllablesSplitter(word: string) {
 	const syllables = []
 
 	while(remaining.length > 0) {
-		let chunk = remaining.slice(-2)
-		if(isConsonant(chunk[0]) && isVowel(chunk[1])) {
+		let chunk = chunkWordBySyllable(remaining, 'cv')
+		if(chunk) {
 			syllables.unshift(chunk)
 			remaining = remaining.slice(0, -2)
 			continue
 		}
 
-		chunk = remaining.slice(-3)
-		if(isConsonant(chunk[0]) && isVowel(chunk[1]) && isConsonant(chunk[2])) {
+		chunk = chunkWordBySyllable(remaining, 'cvc')
+		if(chunk) {
 			syllables.unshift(chunk)
 			remaining = remaining.slice(0, -3)
 			continue
 		}
 
-		chunk = remaining.slice(-4)
-		if(isConsonant(chunk[0]) && isVowel(chunk[1]) && isConsonant(chunk[2]) && isConsonant(chunk[3])) {
+		chunk = chunkWordBySyllable(remaining, 'cvcc')
+		if(chunk) {
 			syllables.unshift(chunk)
 			remaining = remaining.slice(0, -4)
 			continue
@@ -32,4 +32,18 @@ export function syllablesSplitter(word: string) {
 	}
 
 	return syllables
+}
+
+function chunkWordBySyllable(word: string, syllable: string) {
+	const chunk = word.slice(syllable.length * -1)
+
+	for(let i = 0;i < syllable.length;i++) {
+		const isValid = syllable[i] == 'c' ? isConsonant(chunk[i]) : isVowel(chunk[i])
+
+		if(!isValid) {
+			return false
+		}
+	}
+
+	return chunk
 }
