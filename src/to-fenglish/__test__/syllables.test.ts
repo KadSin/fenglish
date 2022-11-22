@@ -36,12 +36,12 @@ describe('syllablesSplitter', () => {
 		)
 	})
 
-	// it('Should split words which contains <KHAA> format', () => {
-	// 	expectWordsHaveSyllablles(
-	// 		['خوابیدَن', 'خواب'],
-	// 		['خوا*بی*دَن', 'خواب'],
-	// 	)
-	// })
+	it('Should split words which contains <KHAA> format', () => {
+		expectWordsHaveSyllablles(
+			['خوابیدَن', 'خواب', 'خوانایی', 'مَخواب', 'خواهِشا', 'خواستَن'],
+			['خوا*بی*دَن', 'خواب', 'خوا*نا*یی', 'مَ*خواب', 'خوا*هِ*شا', 'خواس*تَن'],
+		)
+	})
 
 	test.skip('ToDo: Should split words which contains <Consonant + YE + Vowel> syllables', () => {
 		expectWordsHaveSyllablles(

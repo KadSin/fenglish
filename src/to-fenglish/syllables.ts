@@ -1,4 +1,8 @@
 import { LetterChecker } from './letter-checker'
+const { isConsonant, isVowel } = LetterChecker
+
+const KHAA = 'خا'
+const KHAVA = 'خوا'
 
 export class Syllables {
 	private remaining:string
@@ -9,12 +13,17 @@ export class Syllables {
 	}
 
 	public split() {
-		while(this.remaining.length > 0) {
-			if(this.chunkBySyllable('cv')) {
-				continue
-			}
+		const hasKhaa = this.remaining.includes(KHAVA)
+		if(hasKhaa) {
+			this.remaining = this.remaining.replace(KHAVA, KHAA)
+		}
 
-			if(this.chunkBySyllable('cvc')) {
+		while(this.remaining.length > 0) {
+			if(this.chunkBySyllable('cv') || this.chunkBySyllable('cvc')) {
+				if(hasKhaa && this.syllables[0].includes(KHAA)) {
+					this.syllables[0] = this.syllables[0].replace(KHAA, KHAVA)
+				}
+
 				continue
 			}
 
@@ -30,11 +39,11 @@ export class Syllables {
 	}
 
 	private chunkBySyllable(syllable: string) {
-		const chunkAmount = syllable.length * -1
-		const chunk = this.remaining.slice(chunkAmount)
+		const amount = syllable.length * -1
+		const chunk = this.remaining.slice(amount)
 
 		for(let i = 0;i < syllable.length;i++) {
-			const isValid = syllable[i] == 'c' ? LetterChecker.isConsonant(chunk[i]) : LetterChecker.isVowel(chunk[i])
+			const isValid = syllable[i] == 'c' ? isConsonant(chunk[i]) : isVowel(chunk[i])
 
 			if(!isValid) {
 				return false
@@ -42,7 +51,7 @@ export class Syllables {
 		}
 
 		this.syllables.unshift(chunk)
-		this.remaining = this.remaining.slice(0, chunkAmount)
+		this.remaining = this.remaining.slice(0, amount)
 		return true
 	}
 }
