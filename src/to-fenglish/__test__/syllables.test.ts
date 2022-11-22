@@ -1,4 +1,4 @@
-import { syllablesSplitter } from '../syllables-splitter'
+import { Syllables } from '../syllables'
 
 describe('syllablesSplitter', () => {
 	it('Should split words which contains <Consonant + Vowel + Consonant> syllables', () => {
@@ -36,6 +36,13 @@ describe('syllablesSplitter', () => {
 		)
 	})
 
+	// it('Should split words which contains <KHAA> format', () => {
+	// 	expectWordsHaveSyllablles(
+	// 		['خوابیدَن', 'خواب'],
+	// 		['خوا*بی*دَن', 'خواب'],
+	// 	)
+	// })
+
 	test.skip('ToDo: Should split words which contains <Consonant + YE + Vowel> syllables', () => {
 		expectWordsHaveSyllablles(
 			['قُسطَنتَنیِه', 'کُلیات', 'روحانیون', 'سیاسَتمَدار'],
@@ -46,7 +53,7 @@ describe('syllablesSplitter', () => {
 
 function expectWordsHaveSyllablles(words: string[], syllables: string[]) {
 	words.forEach((word, i) => {
-		expect(syllablesSplitter(word))
+		expect(new Syllables(word).split())
 			.toEqual(syllables[i].split('*'))
 	})
 }
