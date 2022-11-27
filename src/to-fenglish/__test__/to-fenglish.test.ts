@@ -175,10 +175,10 @@ describe('toFenglish', () => {
 			)
 		})
 
-		it('Word contains <YE + ALEF> format should be `ia`', () => {
+		it('Word contains <YE + ALEF> format should be `iya`', () => {
 			expectPersianIsFenglish(
-				['بیا', 'ریا', 'میام', 'شیار', 'خیار', 'نِمیام', 'سیاه', 'آیات'],
-				['bia', 'ria', 'miam', 'shiar', 'khiar', 'nemiam', 'siah', 'ayaat'],
+				['بیا', 'ریا', 'میام', 'شیار', 'خیار', 'نِمیام', 'سیاه'],
+				['biya', 'riya', 'miyam', 'shiyar', 'khiyar', 'nemiyam', 'siyah'],
 			)
 		})
 	})
