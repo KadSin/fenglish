@@ -49,6 +49,13 @@ describe('syllablesSplitter', () => {
 			['قُس*طَن*تَ*نی*یِه', 'کُ*لی*یات', 'رو*حا*نی*یون', 'سی*یا*سَت*مَ*دار'],
 		)
 	})
+
+	it('Should split word syllables which have two sequenced long vowel', () => {
+		expectWordsHaveSyllablles(
+			['آیینِه', 'دایی', 'چایی', 'داوود', 'کاووس'],
+			['آ*یی*نِه', 'دا*یی', 'چا*یی', 'دا*وود', 'کا*ووس'],
+		)
+	})
 })
 
 function expectWordsHaveSyllablles(words: string[], syllables: string[]) {
