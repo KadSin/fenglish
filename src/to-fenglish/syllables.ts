@@ -1,8 +1,9 @@
 import { LetterChecker } from './letter-checker'
-const { isConsonant, isVowel } = LetterChecker
+const { isYe, isConsonant, isVowel } = LetterChecker
 
 const KHAA = 'خا'
 const KHAVA = 'خوا'
+const YE = 'ی'
 
 export class Syllables {
 	private remaining:string
@@ -22,6 +23,12 @@ export class Syllables {
 			if(this.chunkBySyllable('cv') || this.chunkBySyllable('cvc')) {
 				if(hasKhaa && this.syllables[0].includes(KHAA)) {
 					this.syllables[0] = this.syllables[0].replace(KHAA, KHAVA)
+				}
+
+				if(this.remaining.length > 0) {
+					if(!isVowel(this.remaining.slice(-1)) && isYe(this.syllables[0][0]) && isVowel(this.syllables[0][1])) {
+						this.remaining += YE
+					}
 				}
 
 				continue

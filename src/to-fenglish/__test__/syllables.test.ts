@@ -43,7 +43,7 @@ describe('syllablesSplitter', () => {
 		)
 	})
 
-	test.skip('ToDo: Should split words which contains <Consonant + YE + Vowel> syllables', () => {
+	it('Should split words which contains <Consonant + YE + Vowel> syllables', () => {
 		expectWordsHaveSyllablles(
 			['قُسطَنتَنیِه', 'کُلیات', 'روحانیون', 'سیاسَتمَدار'],
 			['قُس*طَن*تَ*نی*یِه', 'کُ*لی*یات', 'رو*حا*نی*یون', 'سی*یا*سَت*مَ*دار'],
