@@ -163,8 +163,8 @@ describe('toFenglish', () => {
 
 		it('Word contains <YE + YE> format should be `yee`', () => {
 			expectPersianIsFenglish(
-				['مایی', 'پایین', 'لایی', 'چایی', 'بابایی', 'آقاییم', 'زاییدی'],
-				['mayee', 'payeen', 'layee', 'chayee', 'babayee', 'aghayeem', 'zayeedi'],
+				['مایی', 'پایین', 'لایی', 'چایی', 'بابایی', 'آقاییم', 'زاییدی', 'آیین'],
+				['mayee', 'payeen', 'layee', 'chayee', 'babayee', 'aghayeem', 'zayeedi', 'ayeen'],
 			)
 		})
 
