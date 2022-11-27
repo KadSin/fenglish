@@ -1,6 +1,6 @@
 import { LetterChecker } from '../letter-checker'
 
-const { isShortVowel, isLongVowel, isVowel, isAlef, isO, isKhaa, isVaav, isYe } = LetterChecker
+const { isConsonant, isShortVowel, isLongVowel, isVowel, isAlef, isO, isKhaa, isVaav, isYe } = LetterChecker
 
 describe('LetterChecker', () => {
 	describe('isShortVowel', () => {
@@ -30,6 +30,10 @@ describe('LetterChecker', () => {
 	})
 
 	describe('isLongVowel', () => {
+		it('Should identify `alef ba kolah` as a `vowel`', () => {
+			expect(isLongVowel('آ')).toBeTruthy()
+		})
+
 		it('Should identify `alef` as a `vowel`', () => {
 			expect(isLongVowel('ا')).toBeTruthy()
 		})
@@ -66,6 +70,10 @@ describe('LetterChecker', () => {
 
 		it('Should identify `o` as a `vowel`', () => {
 			expect(isVowel('ُ')).toBeTruthy()
+		})
+
+		it('Should identify `alef ba kolah` as a `vowel`', () => {
+			expect(isVowel('آ')).toBeTruthy()
 		})
 
 		it('Should identify `alef` as a `vowel`', () => {
@@ -112,6 +120,13 @@ describe('LetterChecker', () => {
 	describe('isYe', () => {
 		it('Should identify `ye`', () => {
 			expect(isYe('ی')).toBeTruthy()
+		})
+	})
+
+	describe('isConsonant', () => {
+		it('Should not identify short vowels as consonant', () => {
+			const vowels = 'ًٌٍَُِ'.split('')
+			vowels.forEach((v) => expect(isConsonant(v)).toBeFalsy())
 		})
 	})
 })

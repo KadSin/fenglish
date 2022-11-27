@@ -6,8 +6,12 @@ export class LetterChecker {
 		return ['ً', 'ٍ', 'ٌ', 'َ', 'ِ', 'ُ'].includes(char)
 	}
 
+	public static isConsonant(char: string) {
+		return !LetterChecker.isShortVowel(char)
+	}
+
 	public static isLongVowel(char: string) {
-		return ['ا', 'أ', 'و', 'ی'].includes(char)
+		return ['ا', 'آ', 'أ', 'و', 'ی'].includes(char)
 	}
 
 	public static isVowel(char: string) {

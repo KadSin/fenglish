@@ -163,8 +163,8 @@ describe('toFenglish', () => {
 
 		it('Word contains <YE + YE> format should be `yee`', () => {
 			expectPersianIsFenglish(
-				['مایی', 'پایین', 'لایی', 'چایی', 'بابایی', 'آقاییم', 'زاییدی'],
-				['mayee', 'payeen', 'layee', 'chayee', 'babayee', 'aghayeem', 'zayeedi'],
+				['مایی', 'پایین', 'لایی', 'چایی', 'بابایی', 'آقاییم', 'زاییدی', 'آیین'],
+				['mayee', 'payeen', 'layee', 'chayee', 'babayee', 'aghayeem', 'zayeedi', 'ayeen'],
 			)
 		})
 
@@ -175,10 +175,10 @@ describe('toFenglish', () => {
 			)
 		})
 
-		it('Word contains <YE + ALEF> format should be `ia`', () => {
+		it('Word contains <YE + ALEF> format should be `iya`', () => {
 			expectPersianIsFenglish(
-				['بیا', 'ریا', 'میام', 'شیار', 'خیار', 'نِمیام', 'سیاه', 'آیات'],
-				['bia', 'ria', 'miam', 'shiar', 'khiar', 'nemiam', 'siah', 'ayaat'],
+				['بیا', 'ریا', 'میام', 'شیار', 'خیار', 'نِمیام', 'سیاه'],
+				['biya', 'riya', 'miyam', 'shiyar', 'khiyar', 'nemiyam', 'siyah'],
 			)
 		})
 	})
