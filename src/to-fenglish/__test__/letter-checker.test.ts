@@ -30,6 +30,10 @@ describe('LetterChecker', () => {
 	})
 
 	describe('isLongVowel', () => {
+		it('Should identify `alef ba kolah` as a `vowel`', () => {
+			expect(isLongVowel('آ')).toBeTruthy()
+		})
+
 		it('Should identify `alef` as a `vowel`', () => {
 			expect(isLongVowel('ا')).toBeTruthy()
 		})
@@ -66,6 +70,10 @@ describe('LetterChecker', () => {
 
 		it('Should identify `o` as a `vowel`', () => {
 			expect(isVowel('ُ')).toBeTruthy()
+		})
+
+		it('Should identify `alef ba kolah` as a `vowel`', () => {
+			expect(isVowel('آ')).toBeTruthy()
 		})
 
 		it('Should identify `alef` as a `vowel`', () => {
