@@ -2,7 +2,7 @@ import lettersMap from './assets/letters-map'
 import { LetterChecker } from './letter-checker'
 import { Syllables } from './syllables'
 
-const { isLongVowel, isShortVowel, isConsonant, isVowel, isO, isAlef, isAyn, isVaav, isKhaa, isYe } = LetterChecker
+const { isLongVowel, isShortVowel, isConsonant, isVowel, isO, isAlef, isAyn, isVaav, isKhaa, isYe, isHamza } = LetterChecker
 
 export class ToFenglish {
 	private text: string
@@ -55,6 +55,11 @@ export class ToFenglish {
 				continue
 			}
 
+			if(isHamza(this.current)) {
+				this.onCurrentLetterIsHamza()
+				continue
+			}
+
 			if(isVaav(this.current) && this.position !== 1) {
 				this.onCurrentLetterIsVaav()
 				continue
@@ -101,6 +106,12 @@ export class ToFenglish {
 				this.fenglish += 'e'
 				return
 			}
+		}
+	}
+
+	private onCurrentLetterIsHamza() {
+		if(isLongVowel(this.next) && isYe(this.next)) {
+			this.fenglish += 'e'
 		}
 	}
 

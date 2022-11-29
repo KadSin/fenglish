@@ -94,7 +94,7 @@ describe('toFenglish', () => {
 			)
 		})
 
-		it('Word containing <... + AYN + LongVowel(YE and ALEF)> format should replace related short vowel instead of ayn', () => {
+		it('Word containing <... + AYN + LongVowel(YE, ALEF and VAAV)> format should use related short vowel instead of ayn', () => {
 			expectPersianIsFenglish(
 				['مُعادِل', 'راعی', 'مُعانِدین', 'سَعید', 'مُعین', 'مَسعود'],
 				['moaadel', 'raei', 'moaanedin', 'saeid', 'moein', 'masood'],
@@ -105,6 +105,15 @@ describe('toFenglish', () => {
 			expectPersianIsFenglish(
 				['مُعَلِم', 'عَلامَت', 'عِشق', 'عَمَل', 'عَذاب'],
 				['moalem', 'alamat', 'eshgh', 'amal', 'azab'],
+			)
+		})
+	})
+
+	describe('hamza', () => {
+		it('Word containing <HAMZA + LongVowel(YE, ALEF and VAAV)> format should use related short vowel instead of hamza', () => {
+			expectPersianIsFenglish(
+				['رَئوفی', 'کَدخُدائی', 'آئین', 'تِئاتر', 'رَئیس', 'زِئوس', 'کاکائو', 'رِئال', 'سورِئال'],
+				['raoofi', 'kadkhodaei', 'aein', 'teatr', 'raeis', 'zeoos', 'kakaoo', 'real', 'sooreal'],
 			)
 		})
 	})
