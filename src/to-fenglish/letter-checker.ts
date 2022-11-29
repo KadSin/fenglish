@@ -26,6 +26,14 @@ export class LetterChecker {
 		return ['آ', 'ا'].includes(char)
 	}
 
+	public static isAyn(char: string) {
+		return 'ع' == char
+	}
+
+	public static isHamza(char: string) {
+		return 'ئ' == char
+	}
+
 	public static isVaav(char: string) {
 		return char == 'و'
 	}

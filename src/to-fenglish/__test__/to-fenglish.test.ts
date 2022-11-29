@@ -73,17 +73,47 @@ describe('toFenglish', () => {
 	})
 
 	describe('ayn', () => {
-		it('Word containing <AYN + Consonant> format should be `aynC`', () => {
+		it('Word containing <AYN + Consonant> format should remove ayn', () => {
 			expectPersianIsFenglish(
-				['اِعلانات', 'مِعرات', 'مُعادِل', 'عامِل'],
-				['elanat', 'merat', 'moadel', 'amel'],
+				['اِعلانات', 'مِعرات', 'مَعلوم', 'دَعوا', 'رَعشِه'],
+				['elanat', 'merat', 'maloom', 'dava', 'rasheh'],
 			)
 		})
 
-		it('Word containing <AYN + Vowel> format should be `aynV`', () => {
+		it('Word start with <AYN + ALEF> format should remove ayn', () => {
 			expectPersianIsFenglish(
-				['مُعَلِم', 'عَلامَت', 'عاشِق', 'عِشق', 'عَمَل', 'عَذاب'],
-				['moalem', 'alamat', 'ashegh', 'eshgh', 'amal', 'azab'],
+				['عامِل', 'عاشِق', 'عادی'],
+				['amel', 'ashegh', 'adi'],
+			)
+		})
+
+		it('Word containing <AYN + Vowel> format should remove ayn', () => {
+			expectPersianIsFenglish(
+				['مُعَلِم', 'مُعَدِل', 'عَلامَت', 'عِشق', 'عَمَل', 'عَذاب'],
+				['moalem', 'moadel', 'alamat', 'eshgh', 'amal', 'azab'],
+			)
+		})
+
+		it('Word containing <... + AYN + LongVowel(YE, ALEF and VAAV)> format should use related short vowel instead of ayn', () => {
+			expectPersianIsFenglish(
+				['مُعادِل', 'راعی', 'مُعانِدین', 'سَعید', 'مُعین', 'مَسعود'],
+				['moaadel', 'raei', 'moaanedin', 'saeid', 'moein', 'masood'],
+			)
+		})
+
+		it('Word containing <AYN + ShortVowel> format should remove ayn', () => {
+			expectPersianIsFenglish(
+				['مُعَلِم', 'عَلامَت', 'عِشق', 'عَمَل', 'عَذاب'],
+				['moalem', 'alamat', 'eshgh', 'amal', 'azab'],
+			)
+		})
+	})
+
+	describe('hamza', () => {
+		it('Word containing <HAMZA + LongVowel(YE, ALEF and VAAV)> format should use related short vowel instead of hamza', () => {
+			expectPersianIsFenglish(
+				['رَئوفی', 'کَدخُدائی', 'آئین', 'تِئاتر', 'رَئیس', 'زِئوس', 'کاکائو', 'رِئال', 'سورِئال'],
+				['raoofi', 'kadkhodaei', 'aein', 'teatr', 'raeis', 'zeoos', 'kakaoo', 'real', 'sooreal'],
 			)
 		})
 	})

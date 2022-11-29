@@ -2,11 +2,12 @@ import lettersMap from './assets/letters-map'
 import { LetterChecker } from './letter-checker'
 import { Syllables } from './syllables'
 
-const { isLongVowel, isShortVowel, isConsonant, isVowel, isO, isAlef, isVaav, isKhaa, isYe } = LetterChecker
+const { isLongVowel, isShortVowel, isConsonant, isVowel, isO, isAlef, isAyn, isVaav, isKhaa, isYe, isHamza } = LetterChecker
 
 export class ToFenglish {
 	private text: string
 	private position = 1
+	private positionInWord = 0
 	private fenglish = ''
 	private previous = ''
 	private current = ''
@@ -23,7 +24,7 @@ export class ToFenglish {
 
 		for (const word of words) {
 			// if word's format is <ALEF (may exists) + LETTER + ALEF + LETTER>
-			if(/^(آ|ا){0,1}.(آ|ا).$/.test(word)) {
+			if(/^([آا]?).([آا]).$/.test(word)) {
 				this.onWordShouldHaveTwoA(word)
 			} else {
 				this.fenglish = ''
@@ -39,13 +40,23 @@ export class ToFenglish {
 	}
 
 	private bySyllable() {
-		for (this.position = 1; this.position <= this.syllable.length; this.position++) {
+		for (this.position = 1; this.position <= this.syllable.length; this.position++, this.positionInWord++) {
 			this.previous = this.syllable[this.position - 2]
 			this.current = this.syllable[this.position - 1]
 			this.next = this.syllable[this.position]
 
 			if(isAlef(this.current)) {
 				this.onCurrentLetterIsAlef()
+				continue
+			}
+
+			if(isAyn(this.current)) {
+				this.onCurrentLetterIsAyn()
+				continue
+			}
+
+			if(isHamza(this.current)) {
+				this.onCurrentLetterIsHamza()
 				continue
 			}
 
@@ -82,6 +93,26 @@ export class ToFenglish {
 		}
 
 		this.translateCurrentLetter()
+	}
+
+	private onCurrentLetterIsAyn() {
+		if(this.positionInWord > 1) {
+			if(isAlef(this.next)) {
+				this.fenglish += 'a'
+				return
+			}
+
+			if(isYe(this.next)) {
+				this.fenglish += 'e'
+				return
+			}
+		}
+	}
+
+	private onCurrentLetterIsHamza() {
+		if(isYe(this.next)) {
+			this.fenglish += 'e'
+		}
 	}
 
 	private onCurrentLetterIsVaav() {
