@@ -24,7 +24,7 @@ export class ToFenglish {
 
 		for (const word of words) {
 			// if word's format is <ALEF (may exists) + LETTER + ALEF + LETTER>
-			if(/^(آ|ا)?.(آ|ا).$/.test(word)) {
+			if(/^([آا]?).([آا]).$/.test(word)) {
 				this.onWordShouldHaveTwoA(word)
 			} else {
 				this.fenglish = ''
@@ -96,7 +96,7 @@ export class ToFenglish {
 	}
 
 	private onCurrentLetterIsAyn() {
-		if(this.positionInWord > 1 && isLongVowel(this.next)) {
+		if(this.positionInWord > 1) {
 			if(isAlef(this.next)) {
 				this.fenglish += 'a'
 				return
@@ -110,7 +110,7 @@ export class ToFenglish {
 	}
 
 	private onCurrentLetterIsHamza() {
-		if(isLongVowel(this.next) && isYe(this.next)) {
+		if(isYe(this.next)) {
 			this.fenglish += 'e'
 		}
 	}

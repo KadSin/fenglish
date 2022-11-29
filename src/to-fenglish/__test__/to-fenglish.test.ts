@@ -101,7 +101,7 @@ describe('toFenglish', () => {
 			)
 		})
 
-		it('Word containing <AYN + Vowel> format should remove ayn', () => {
+		it('Word containing <AYN + ShortVowel> format should remove ayn', () => {
 			expectPersianIsFenglish(
 				['مُعَلِم', 'عَلامَت', 'عِشق', 'عَمَل', 'عَذاب'],
 				['moalem', 'alamat', 'eshgh', 'amal', 'azab'],
