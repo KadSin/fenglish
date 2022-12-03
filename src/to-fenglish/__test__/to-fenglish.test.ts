@@ -76,7 +76,7 @@ describe('toFenglish', () => {
 		it('Word containing <AYN + Consonant> format should remove ayn', () => {
 			expectPersianIsFenglish(
 				['اِعلانات', 'مِعرات', 'مَعلوم', 'دَعوا', 'رَعشِه'],
-				['elanat', 'merat', 'maloom', 'dava', 'rasheh'],
+				['elanat', 'merat', 'maloom', 'dava', 'rashe'],
 			)
 		})
 
@@ -209,6 +209,15 @@ describe('toFenglish', () => {
 			expectPersianIsFenglish(
 				['بیا', 'ریا', 'میام', 'شیار', 'خیار', 'نِمیام', 'سیاه'],
 				['biya', 'riya', 'miyam', 'shiyar', 'khiyar', 'nemiyam', 'siyah'],
+			)
+		})
+	})
+
+	describe('eh', () => {
+		it('Word end with <E + H> format should remove `H`', () => {
+			expectPersianIsFenglish(
+				['یوسُفیِه', 'مَجیدیِه', 'قُسطَنتَنیِه', 'یِکیِه'],
+				['yoosofiye', 'majidiye', 'ghostantaniye', 'yekiye'],
 			)
 		})
 	})

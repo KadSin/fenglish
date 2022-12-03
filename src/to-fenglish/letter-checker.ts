@@ -18,6 +18,10 @@ export class LetterChecker {
 		return LetterChecker.isShortVowel(char) || LetterChecker.isLongVowel(char)
 	}
 
+	public static isE(char: string) {
+		return 'ِ' == char
+	}
+
 	public static isO(char: string) {
 		return 'ُ' == char
 	}
@@ -44,5 +48,9 @@ export class LetterChecker {
 
 	public static isYe(char: string) {
 		return char == 'ی'
+	}
+
+	public static isH(char: string) {
+		return char == 'ه'
 	}
 }

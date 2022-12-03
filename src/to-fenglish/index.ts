@@ -2,7 +2,7 @@ import lettersMap from './assets/letters-map'
 import { LetterChecker } from './letter-checker'
 import { Syllables } from './syllables'
 
-const { isLongVowel, isShortVowel, isConsonant, isVowel, isO, isAlef, isAyn, isVaav, isKhaa, isYe, isHamza } = LetterChecker
+const { isLongVowel, isShortVowel, isConsonant, isVowel, isO, isAlef, isAyn, isVaav, isKhaa, isYe, isHamza, isE, isH } = LetterChecker
 
 export class ToFenglish {
 	private text: string
@@ -12,6 +12,7 @@ export class ToFenglish {
 	private previous = ''
 	private current = ''
 	private next = ''
+	private word = ''
 	private syllable = ''
 
 	constructor(text: string|null|undefined) {
@@ -22,13 +23,13 @@ export class ToFenglish {
 		const words = this.text.split(' ')
 		const fenglishWords = []
 
-		for (const word of words) {
+		for (this.word of words) {
 			// if word's format is <ALEF (may exists) + LETTER + ALEF + LETTER>
-			if(/^([آا]?).([آا]).$/.test(word)) {
-				this.onWordShouldHaveTwoA(word)
+			if(/^([آا]?).([آا]).$/.test(this.word)) {
+				this.onWordShouldHaveTwoA(this.word)
 			} else {
 				this.fenglish = ''
-				for(this.syllable of new Syllables(word).split()) {
+				for(this.syllable of new Syllables(this.word).split()) {
 					this.bySyllable()
 				}
 			}
@@ -68,6 +69,10 @@ export class ToFenglish {
 			if(isYe(this.current)) {
 				this.onCurrentLetterIsYe()
 				continue
+			}
+
+			if(this.next == undefined && isE(this.previous) && isH(this.current)) {
+				break
 			}
 
 			this.translateCurrentLetter()
