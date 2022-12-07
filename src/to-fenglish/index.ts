@@ -24,20 +24,24 @@ export class ToFenglish {
 		const fenglishWords = []
 
 		for (this.word of words) {
-			// if word's format is <ALEF (may exists) + LETTER + ALEF + LETTER>
-			if(/^([آا]?).([آا]).$/.test(this.word)) {
-				this.onWordShouldHaveTwoA(this.word)
-			} else {
-				this.fenglish = ''
-				for(this.syllable of new Syllables(this.word).split()) {
-					this.bySyllable()
-				}
-			}
-
+			this.byWord()
 			fenglishWords.push(this.fenglish)
 		}
 
 		return fenglishWords.join(' ')
+	}
+
+	private byWord() {
+		// if word's format is <ALEF (may exists) + LETTER + ALEF + LETTER>
+		if(/^([آا]?).([آا]).$/.test(this.word)) {
+			this.onWordShouldHaveTwoA(this.word)
+			return
+		}
+
+		this.fenglish = ''
+		for(this.syllable of new Syllables(this.word).split()) {
+			this.bySyllable()
+		}
 	}
 
 	private bySyllable() {

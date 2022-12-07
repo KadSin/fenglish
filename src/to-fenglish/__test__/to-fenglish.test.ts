@@ -221,6 +221,15 @@ describe('toFenglish', () => {
 			)
 		})
 	})
+
+	describe('pause', () => {
+		it('Add apostrophe after `Vowel` in word contains <Vowel + AYN + RelatedVowel> format', () => {
+			expectPersianIsFenglish(
+				['فِعیل', 'مَعانی', 'مُوعود', 'تَعَدی', 'شایِعِه', 'تَعَهُد'],
+				['fe\'eil', 'ma\'aani', 'mo\'ood', 'ta\'adi', 'shaye\'eh', 'ta\'ahod'],
+			)
+		})
+	})
 })
 
 function expectPersianIsFenglish(persian: Array<string|null|undefined>, fenglish: string[]) {
