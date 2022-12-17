@@ -1,3 +1,5 @@
+import { HashMap } from './contracts/hash-map.interface'
+
 export class LetterChecker {
 	/**
 	 * @summary is it one of `an`, `en`, `on`, `a`, `e`, `o`?
@@ -16,6 +18,19 @@ export class LetterChecker {
 
 	public static isVowel(char: string) {
 		return LetterChecker.isShortVowel(char) || LetterChecker.isLongVowel(char)
+	}
+
+	public static isRelatedVowels(first: string, second: string) {
+		const voice: HashMap = {
+			'ا': 'a',
+			'َ': 'a', // __َ_
+			'ِ': 'e', // ‾‾ِ‾
+			'ی': 'e',
+			'ُ': 'o', // __ُ_
+			'و': 'o',
+		}
+
+		return voice[first] === voice[second]
 	}
 
 	public static isE(char: string) {

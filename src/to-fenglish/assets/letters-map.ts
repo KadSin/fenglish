@@ -1,7 +1,4 @@
+import { HashMap } from '../contracts/hash-map.interface'
 import lettersMap from './letters-map.json'
 
-interface LettersMap {
-	[index: string]: string
-}
-
-export default <LettersMap>lettersMap
+export default <HashMap>lettersMap
