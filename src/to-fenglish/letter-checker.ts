@@ -18,6 +18,19 @@ export class LetterChecker {
 		return LetterChecker.isShortVowel(char) || LetterChecker.isLongVowel(char)
 	}
 
+	public static isRelatedVowels(first: string, second: string) {
+		const voice: { [index :string] :string } = {
+			'ا': 'a',
+			'َ': 'a', // __َ_
+			'ِ': 'e', // ‾‾ِ‾
+			'ی': 'e',
+			'ُ': 'o', // __ُ_
+			'و': 'o',
+		}
+
+		return voice[first] === voice[second]
+	}
+
 	public static isE(char: string) {
 		return 'ِ' == char
 	}

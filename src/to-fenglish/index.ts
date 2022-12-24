@@ -1,8 +1,9 @@
-import lettersMap from './assets/letters-map'
+import lettersMap from './assets/letters-map.json'
 import { LetterChecker } from './letter-checker'
 import { Syllables } from './syllables'
 
-const { isLongVowel, isShortVowel, isConsonant, isVowel, isO, isAlef, isAyn, isVaav, isKhaa, isYe, isHamza, isE, isH } = LetterChecker
+const { isLongVowel, isShortVowel, isRelatedVowels, isVowel, isO, isE,
+	isConsonant, isAlef, isAyn, isVaav, isKhaa, isYe, isHamza, isH } = LetterChecker
 
 export class ToFenglish {
 	private text: string
@@ -24,20 +25,24 @@ export class ToFenglish {
 		const fenglishWords = []
 
 		for (this.word of words) {
-			// if word's format is <ALEF (may exists) + LETTER + ALEF + LETTER>
-			if(/^([آا]?).([آا]).$/.test(this.word)) {
-				this.onWordShouldHaveTwoA(this.word)
-			} else {
-				this.fenglish = ''
-				for(this.syllable of new Syllables(this.word).split()) {
-					this.bySyllable()
-				}
-			}
-
+			this.byWord()
 			fenglishWords.push(this.fenglish)
 		}
 
 		return fenglishWords.join(' ')
+	}
+
+	private byWord() {
+		// if word's format is <ALEF (may exists) + LETTER + ALEF + LETTER>
+		if(/^([آا]?).([آا]).$/.test(this.word)) {
+			this.onWordShouldHaveTwoA(this.word)
+			return
+		}
+
+		this.fenglish = ''
+		for(this.syllable of new Syllables(this.word).split()) {
+			this.bySyllable()
+		}
 	}
 
 	private bySyllable() {
@@ -102,6 +107,13 @@ export class ToFenglish {
 
 	private onCurrentLetterIsAyn() {
 		if(this.positionInWord > 1) {
+			if(isRelatedVowels(
+				this.word[this.positionInWord - 1],
+				this.word[this.positionInWord + 1],
+			)) {
+				this.fenglish += '\''
+			}
+
 			if(isAlef(this.next)) {
 				this.fenglish += 'a'
 				return
@@ -169,7 +181,6 @@ export class ToFenglish {
 	}
 
 	private fenglishLetter(letter: string) {
-		const translated = lettersMap[letter]
-		return translated == undefined ? letter : translated
+		return (<{ [index :string] :string }> lettersMap)[letter] || letter
 	}
 }
