@@ -2,7 +2,7 @@
 
 <a href="https://www.npmjs.com/package/fenglish"><img src="https://img.shields.io/npm/v/fenglish?label=version" alt="Version"></a>
 <a href="https://www.npmjs.com/package/fenglish?minimal=true"><img src="https://img.shields.io/npm/dm/fenglish" alt="Downloads"></a>
-<img src="https://img.shields.io/github/workflow/status/kadsin/fenglish/Test?label=tests" alt="Tests">
+<img src="https://img.shields.io/github/actions/workflow/status/kadsin/fenglish/test-project.yml?label=tests" alt="Tests">
 <img src="https://img.shields.io/github/license/kadsin/fenglish" alt="License">
 
 Includes utilities which play with persian texts for Fenglish purposes.
