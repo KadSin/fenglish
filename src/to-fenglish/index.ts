@@ -1,4 +1,4 @@
-import lettersMap from './assets/letters-map'
+import lettersMap from './assets/letters-map.json'
 import { LetterChecker } from './letter-checker'
 import { Syllables } from './syllables'
 
@@ -181,7 +181,6 @@ export class ToFenglish {
 	}
 
 	private fenglishLetter(letter: string) {
-		const translated = lettersMap[letter]
-		return translated == undefined ? letter : translated
+		return (<{ [index :string] :string }> lettersMap)[letter] || letter
 	}
 }
