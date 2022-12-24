@@ -39,7 +39,9 @@ export class ToFenglish {
 			return
 		}
 
+		this.positionInWord = 0
 		this.fenglish = ''
+
 		for(this.syllable of new Syllables(this.word).split()) {
 			this.bySyllable()
 		}
@@ -76,7 +78,7 @@ export class ToFenglish {
 				continue
 			}
 
-			if(this.next == undefined && isE(this.previous) && isH(this.current)) {
+			if(this.word[this.positionInWord + 1] == undefined && isE(this.previous) && isH(this.current)) {
 				break
 			}
 
