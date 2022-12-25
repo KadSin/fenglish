@@ -216,8 +216,8 @@ describe('toFenglish', () => {
 	describe('eh', () => {
 		it('Word end with <E + H> format should remove `H`', () => {
 			expectPersianIsFenglish(
-				['یوسُفیِه', 'مَجیدیِه', 'قُسطَنتَنیِه', 'یِکیِه'],
-				['yoosofiye', 'majidiye', 'ghostantaniye', 'yekiye'],
+				['یوسُفیِه', 'مَجیدیِه', 'قُسطَنتَنیِه', 'یِکیِه', 'مُحسِنیِه', 'ذِهنیِه'],
+				['yoosofiye', 'majidiye', 'ghostantaniye', 'yekiye', 'mohseniye', 'zehniye'],
 			)
 		})
 	})
